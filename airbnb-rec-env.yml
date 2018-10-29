@@ -5,6 +5,7 @@ dependencies:
   - blas=1.0=mkl
   - ca-certificates=2018.03.07=0
   - certifi=2018.10.15=py37_0
+  - django=2.1.2=py37_0
   - intel-openmp=2019.0=118
   - libcxx=4.0.1=hcfea43d_1
   - libcxxabi=4.0.1=hcfea43d_1
