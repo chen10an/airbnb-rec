@@ -1,0 +1,513 @@
+[
+  {
+    "id": "ETgJqJHV7BW6pIr9Ox74sA",
+    "alias": "amélie-new-york",
+    "name": "Amélie",
+    "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/cSDgVuPMnJgMLTrTNSEXug/o.jpg",
+    "is_claimed": true,
+    "is_closed": false,
+    "url": "https://www.yelp.com/biz/am%C3%A9lie-new-york?adjust_creative=vSc4zqXxou5UdN6T_sbcqg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_lookup&utm_source=vSc4zqXxou5UdN6T_sbcqg",
+    "phone": "+12125332962",
+    "display_phone": "(212) 533-2962",
+    "review_count": 2220,
+    "categories": [
+      {
+        "alias": "french",
+        "title": "French"
+      },
+      {
+        "alias": "wine_bars",
+        "title": "Wine Bars"
+      }
+    ],
+    "rating": 4.5,
+    "location": {
+      "address1": "22 W 8th St",
+      "address2": "",
+      "address3": "",
+      "city": "New York",
+      "zip_code": "10011",
+      "country": "US",
+      "state": "NY",
+      "display_address": [
+        "22 W 8th St",
+        "New York, NY 10011"
+      ],
+      "cross_streets": "5th Ave & Mac Dougal St"
+    },
+    "coordinates": {
+      "latitude": 40.7327,
+      "longitude": -73.99766
+    },
+    "photos": [
+      "https://s3-media4.fl.yelpcdn.com/bphoto/cSDgVuPMnJgMLTrTNSEXug/o.jpg",
+      "https://s3-media4.fl.yelpcdn.com/bphoto/vmFY7h5byVrl5b1u97iWrg/o.jpg",
+      "https://s3-media3.fl.yelpcdn.com/bphoto/zGH871vKqT6-jVvbvabTgg/o.jpg"
+    ],
+    "price": "$$",
+    "hours": [
+      {
+        "open": [
+          {
+            "is_overnight": false,
+            "start": "1700",
+            "end": "2330",
+            "day": 0
+          },
+          {
+            "is_overnight": false,
+            "start": "1130",
+            "end": "2330",
+            "day": 1
+          },
+          {
+            "is_overnight": false,
+            "start": "1130",
+            "end": "2330",
+            "day": 2
+          },
+          {
+            "is_overnight": false,
+            "start": "1130",
+            "end": "2330",
+            "day": 3
+          },
+          {
+            "is_overnight": true,
+            "start": "1130",
+            "end": "0130",
+            "day": 4
+          },
+          {
+            "is_overnight": true,
+            "start": "1130",
+            "end": "0130",
+            "day": 5
+          },
+          {
+            "is_overnight": false,
+            "start": "1100",
+            "end": "2330",
+            "day": 6
+          }
+        ],
+        "hours_type": "REGULAR",
+        "is_open_now": true
+      }
+    ],
+    "transactions": [
+      "restaurant_reservation"
+    ]
+  },
+  {
+    "id": "8Oo2AtQEPDfxIOnA8wfXoQ",
+    "alias": "886-new-york",
+    "name": "886",
+    "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/KbNrBhg5PCtooI01XYPNhA/o.jpg",
+    "is_claimed": true,
+    "is_closed": false,
+    "url": "https://www.yelp.com/biz/886-new-york?adjust_creative=vSc4zqXxou5UdN6T_sbcqg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_lookup&utm_source=vSc4zqXxou5UdN6T_sbcqg",
+    "phone": "+16468820231",
+    "display_phone": "(646) 882-0231",
+    "review_count": 146,
+    "categories": [
+      {
+        "alias": "taiwanese",
+        "title": "Taiwanese"
+      }
+    ],
+    "rating": 4.0,
+    "location": {
+      "address1": "26 Saint Marks Pl",
+      "address2": "",
+      "address3": null,
+      "city": "New York",
+      "zip_code": "10003",
+      "country": "US",
+      "state": "NY",
+      "display_address": [
+        "26 Saint Marks Pl",
+        "New York, NY 10003"
+      ],
+      "cross_streets": ""
+    },
+    "coordinates": {
+      "latitude": 40.72877,
+      "longitude": -73.98873
+    },
+    "photos": [
+      "https://s3-media2.fl.yelpcdn.com/bphoto/jSTPhNJclVs9R_eDuipVBQ/o.jpg",
+      "https://s3-media1.fl.yelpcdn.com/bphoto/eIhH5XURo9PSS_lt_3Hx6w/o.jpg",
+      "https://s3-media2.fl.yelpcdn.com/bphoto/xp0dnvF7apCyLa8Nl23qjw/o.jpg"
+    ],
+    "price": "$$",
+    "hours": [
+      {
+        "open": [
+          {
+            "is_overnight": false,
+            "start": "1730",
+            "end": "0000",
+            "day": 1
+          },
+          {
+            "is_overnight": false,
+            "start": "1730",
+            "end": "0000",
+            "day": 2
+          },
+          {
+            "is_overnight": false,
+            "start": "1730",
+            "end": "0000",
+            "day": 3
+          },
+          {
+            "is_overnight": false,
+            "start": "1730",
+            "end": "0000",
+            "day": 4
+          },
+          {
+            "is_overnight": false,
+            "start": "1200",
+            "end": "1500",
+            "day": 5
+          },
+          {
+            "is_overnight": false,
+            "start": "1730",
+            "end": "0000",
+            "day": 5
+          },
+          {
+            "is_overnight": false,
+            "start": "1200",
+            "end": "1500",
+            "day": 6
+          },
+          {
+            "is_overnight": false,
+            "start": "1730",
+            "end": "0000",
+            "day": 6
+          }
+        ],
+        "hours_type": "REGULAR",
+        "is_open_now": false
+      }
+    ],
+    "transactions": []
+  },
+  {
+    "id": "jjJc_CrkB2HodEinB6cWww",
+    "alias": "lovemama-new-york",
+    "name": "LoveMama",
+    "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/bLlFKTlVuLfmF-lIDGIjZA/o.jpg",
+    "is_claimed": true,
+    "is_closed": false,
+    "url": "https://www.yelp.com/biz/lovemama-new-york?adjust_creative=vSc4zqXxou5UdN6T_sbcqg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_lookup&utm_source=vSc4zqXxou5UdN6T_sbcqg",
+    "phone": "+12122545370",
+    "display_phone": "(212) 254-5370",
+    "review_count": 3497,
+    "categories": [
+      {
+        "alias": "thai",
+        "title": "Thai"
+      },
+      {
+        "alias": "malaysian",
+        "title": "Malaysian"
+      },
+      {
+        "alias": "vietnamese",
+        "title": "Vietnamese"
+      }
+    ],
+    "rating": 4.0,
+    "location": {
+      "address1": "174 2nd Ave",
+      "address2": "",
+      "address3": "",
+      "city": "New York",
+      "zip_code": "10003",
+      "country": "US",
+      "state": "NY",
+      "display_address": [
+        "174 2nd Ave",
+        "New York, NY 10003"
+      ],
+      "cross_streets": "12th St & 11th St"
+    },
+    "coordinates": {
+      "latitude": 40.7303859,
+      "longitude": -73.9860613
+    },
+    "photos": [
+      "https://s3-media1.fl.yelpcdn.com/bphoto/bLlFKTlVuLfmF-lIDGIjZA/o.jpg",
+      "https://s3-media3.fl.yelpcdn.com/bphoto/VUZKcwpdMpDRUuh-2A4XPA/o.jpg",
+      "https://s3-media2.fl.yelpcdn.com/bphoto/IMCy_HKjbvfVBvY4FV1CRQ/o.jpg"
+    ],
+    "price": "$$",
+    "hours": [
+      {
+        "open": [
+          {
+            "is_overnight": false,
+            "start": "1130",
+            "end": "2300",
+            "day": 0
+          },
+          {
+            "is_overnight": false,
+            "start": "1130",
+            "end": "2300",
+            "day": 1
+          },
+          {
+            "is_overnight": false,
+            "start": "1130",
+            "end": "2300",
+            "day": 2
+          },
+          {
+            "is_overnight": false,
+            "start": "1130",
+            "end": "2300",
+            "day": 3
+          },
+          {
+            "is_overnight": false,
+            "start": "1130",
+            "end": "2300",
+            "day": 4
+          },
+          {
+            "is_overnight": false,
+            "start": "1130",
+            "end": "2300",
+            "day": 5
+          },
+          {
+            "is_overnight": false,
+            "start": "1130",
+            "end": "2300",
+            "day": 6
+          }
+        ],
+        "hours_type": "REGULAR",
+        "is_open_now": true
+      }
+    ],
+    "transactions": [
+      "delivery",
+      "pickup",
+      "restaurant_reservation"
+    ]
+  },
+  {
+    "id": "CwOAKJdX8AMz5iAoA-ZEuA",
+    "alias": "uglyduckling-brooklyn",
+    "name": "Uglyduckling",
+    "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/vyH8WZkvbeWHebYYz-M8rg/o.jpg",
+    "is_claimed": true,
+    "is_closed": false,
+    "url": "https://www.yelp.com/biz/uglyduckling-brooklyn?adjust_creative=vSc4zqXxou5UdN6T_sbcqg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_lookup&utm_source=vSc4zqXxou5UdN6T_sbcqg",
+    "phone": "+17184513825",
+    "display_phone": "(718) 451-3825",
+    "review_count": 390,
+    "categories": [
+      {
+        "alias": "tradamerican",
+        "title": "American (Traditional)"
+      },
+      {
+        "alias": "gastropubs",
+        "title": "Gastropubs"
+      }
+    ],
+    "rating": 4.0,
+    "location": {
+      "address1": "166 Smith St",
+      "address2": "",
+      "address3": "",
+      "city": "Brooklyn",
+      "zip_code": "11201",
+      "country": "US",
+      "state": "NY",
+      "display_address": [
+        "166 Smith St",
+        "Brooklyn, NY 11201"
+      ],
+      "cross_streets": "Wyckoff St & Warren St"
+    },
+    "coordinates": {
+      "latitude": 40.686023,
+      "longitude": -73.991302
+    },
+    "photos": [
+      "https://s3-media2.fl.yelpcdn.com/bphoto/vyH8WZkvbeWHebYYz-M8rg/o.jpg",
+      "https://s3-media3.fl.yelpcdn.com/bphoto/gVlbsYrlDSDePsYpHNq9aQ/o.jpg",
+      "https://s3-media1.fl.yelpcdn.com/bphoto/xeJxKNLIbl8bGTe7z3HWYw/o.jpg"
+    ],
+    "price": "$$",
+    "hours": [
+      {
+        "open": [
+          {
+            "is_overnight": false,
+            "start": "1130",
+            "end": "0000",
+            "day": 0
+          },
+          {
+            "is_overnight": false,
+            "start": "1130",
+            "end": "0000",
+            "day": 1
+          },
+          {
+            "is_overnight": false,
+            "start": "1130",
+            "end": "0000",
+            "day": 2
+          },
+          {
+            "is_overnight": true,
+            "start": "1130",
+            "end": "0200",
+            "day": 3
+          },
+          {
+            "is_overnight": true,
+            "start": "1130",
+            "end": "0200",
+            "day": 4
+          },
+          {
+            "is_overnight": true,
+            "start": "1100",
+            "end": "0200",
+            "day": 5
+          },
+          {
+            "is_overnight": false,
+            "start": "1100",
+            "end": "0000",
+            "day": 6
+          }
+        ],
+        "hours_type": "REGULAR",
+        "is_open_now": true
+      }
+    ],
+    "transactions": [
+      "restaurant_reservation",
+      "pickup",
+      "delivery"
+    ]
+  },
+  {
+    "id": "pL2tig3FxJcrZ4wDIO4TsA",
+    "alias": "eataly-downtown-new-york",
+    "name": "Eataly Downtown",
+    "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/wN_daB_fwBnrixCW_dH27A/o.jpg",
+    "is_claimed": true,
+    "is_closed": false,
+    "url": "https://www.yelp.com/biz/eataly-downtown-new-york?adjust_creative=vSc4zqXxou5UdN6T_sbcqg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_lookup&utm_source=vSc4zqXxou5UdN6T_sbcqg",
+    "phone": "+12128972895",
+    "display_phone": "(212) 897-2895",
+    "review_count": 699,
+    "categories": [
+      {
+        "alias": "grocery",
+        "title": "Grocery"
+      },
+      {
+        "alias": "italian",
+        "title": "Italian"
+      },
+      {
+        "alias": "meats",
+        "title": "Meat Shops"
+      }
+    ],
+    "rating": 3.5,
+    "location": {
+      "address1": "101 Liberty St",
+      "address2": "Fl 3",
+      "address3": "",
+      "city": "New York",
+      "zip_code": "10006",
+      "country": "US",
+      "state": "NY",
+      "display_address": [
+        "101 Liberty St",
+        "Fl 3",
+        "New York, NY 10006"
+      ],
+      "cross_streets": "Trinity Pl & Greenwich St"
+    },
+    "coordinates": {
+      "latitude": 40.709716,
+      "longitude": -74.011714
+    },
+    "photos": [
+      "https://s3-media2.fl.yelpcdn.com/bphoto/utaFG5OmhQbR7dUpSZJh2g/o.jpg",
+      "https://s3-media1.fl.yelpcdn.com/bphoto/IF4TLE-ocU8NuEbdfs98RA/o.jpg",
+      "https://s3-media2.fl.yelpcdn.com/bphoto/16T0aYPXf6m0WyGM_AA_WA/o.jpg"
+    ],
+    "price": "$$",
+    "hours": [
+      {
+        "open": [
+          {
+            "is_overnight": false,
+            "start": "0700",
+            "end": "2300",
+            "day": 0
+          },
+          {
+            "is_overnight": false,
+            "start": "0700",
+            "end": "2300",
+            "day": 1
+          },
+          {
+            "is_overnight": false,
+            "start": "0700",
+            "end": "2300",
+            "day": 2
+          },
+          {
+            "is_overnight": false,
+            "start": "0700",
+            "end": "2300",
+            "day": 3
+          },
+          {
+            "is_overnight": false,
+            "start": "0700",
+            "end": "2300",
+            "day": 4
+          },
+          {
+            "is_overnight": false,
+            "start": "0700",
+            "end": "2300",
+            "day": 5
+          },
+          {
+            "is_overnight": false,
+            "start": "0700",
+            "end": "2300",
+            "day": 6
+          }
+        ],
+        "hours_type": "REGULAR",
+        "is_open_now": true
+      }
+    ],
+    "transactions": []
+  }
+]
