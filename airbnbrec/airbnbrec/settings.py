@@ -31,12 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-<<<<<<< HEAD
     'recommender',
-=======
-    'recommender.apps.RecommenderConfig',
-    # 'recommender',
->>>>>>> master
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
