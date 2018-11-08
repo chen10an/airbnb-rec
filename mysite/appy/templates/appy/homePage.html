@@ -34,9 +34,9 @@ LOW PRIORITY
 			<div id="big">
 				<div id="formContainer">
 					<p id="formTitle"> Book your NYC stay. </p>
-					<form action="./customizePage.html">
+					<form action="./customizePage.html" method="post">
 						<span>
-							<label>WHERE</label>
+							<label for="where">WHERE</label>
 							<br />
 						  	<select>
 								<option>Allerton</option>
@@ -267,7 +267,7 @@ LOW PRIORITY
 					 	</span>
 					 	<br />
 					 	<span>
-						  	<label>NIGHTS</label>
+						  	<label for="nights">NIGHTS</label>
 						  	<br />
 						  	<input type="date" name="checkin">
 							<input type="date" name="checkout">
@@ -275,7 +275,7 @@ LOW PRIORITY
 						<br />
 						<span>
 						<div class="firstTwoFloaterBig">
-						  	<label for="guestField"># GUESTS</label>
+						  	<label for="numGuests"># GUESTS</label>
 						  	<br />
 						  	<input class="third" type="number" name="numGuests" min=1 placeholder=1> 
 						</div>
@@ -283,12 +283,12 @@ LOW PRIORITY
 						<br />
 						<span> -->
 						<div class="firstTwoFloaterBig">
-						  	<label for="guestField"># BEDS</label>
+						  	<label for="numBeds"># BEDS</label>
 						  	<br />
 						  	<input class="third" type="number" name="numBeds" min=1 placeholder=1> 
 						</div>
 						<div class="lastFloaterBig">
-						  	<label for="guestField"># BEDROOMS</label>
+						  	<label for="numBedrooms"># BEDROOMS</label>
 						  	<br />
 						  	<input class="third" type="number" name="numRooms" min=1 placeholder=1> 
 						</div>
