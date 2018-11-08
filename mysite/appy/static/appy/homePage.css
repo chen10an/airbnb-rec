@@ -50,7 +50,7 @@ body, html {
 
 #formTitleSmall {
 	padding-left: 5vw;
-	padding-top: 20vh;
+	padding-top: 10vh;
 	padding-bottom: 2vh;
 	font-size: 2em;
 	font-weight: bold;
@@ -102,7 +102,7 @@ input {
 
 .lastFloaterSmall {
 	float: left;
-	min-width: 33%;
+	min-width: 32%;
 }
 
 
