@@ -27,7 +27,7 @@ class Offering(models.Model):
     listing_id = models.IntegerField(primary_key=True)
     date_for_stay = models.DateField()
     available = models.CharField(max_length=1)
-    price = models.TextField(blank=True, null=True)  # This field type is a guess.
+    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # This field type is a guess.
 
     class Meta:
         managed = False
