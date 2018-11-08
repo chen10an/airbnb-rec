@@ -1,0 +1,141 @@
+body, html {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-family: 'Poppins', sans-serif;
+}
+
+#backgroundImage {
+	/* image from https://playhardertours.com/wp-content/uploads/2018/06/this-club-for-luxury-second-homeowners-is-like-airbnb-for-the-ultra-rich-take-a-look-inside-1000x500.jpg */
+	background-image: url("airbnb2.jpg");
+	background-size: cover; 
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 100vh;
+	width: 100%;
+}
+
+/*#northStar {
+	height: 6vh;
+	width: 4vw;
+}
+*/
+
+#formContainer {
+	border-radius: 5px;
+	float: right;
+	margin: 20vh;
+	width: 35vw;
+	padding: 5vh;
+	background-color: white;
+	text-align: left;
+}
+
+#formContainerSmall {
+	border-radius: 5px;
+	width: 100vw;
+	padding-top: 3vh;
+	padding-left: 5vw;
+	padding-right: 5vw;
+	padding-bottom: 100%;
+	background-color: white;
+	text-align: left;
+}
+
+#formTitle {
+	font-size: 2em;
+	font-weight: bold;
+	color: #282828;
+}
+
+#formTitleSmall {
+	padding-left: 5vw;
+	padding-top: 10vh;
+	padding-bottom: 2vh;
+	font-size: 2em;
+	font-weight: bold;
+	color: white;
+}
+
+label {
+	font-size: 0.8em;
+	font-weight: bold;
+	color: #585757;
+}
+
+input {
+	height: 7vh;
+	padding-left: 10px;
+	border-radius: 5px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #D3D3D3;
+	width: 49%;
+}
+
+.third {
+	height: 7vh;
+	padding-left: 10px;
+	border-radius: 5px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #D3D3D3;
+	width: 100%;
+}
+
+.firstTwoFloaterBig{
+	float: left;
+	max-width: 33%;
+	padding-right: 1vw;
+}
+
+.lastFloaterBig {
+	float: left;
+	max-width: 33%;
+}
+
+.firstTwoFloaterSmall{
+	float: left;
+	min-width: 33%;
+	padding-right: 1vw;
+}
+
+.lastFloaterSmall {
+	float: left;
+	min-width: 32%;
+}
+
+
+select {
+	height: 7vh;
+	padding-left: 10px;
+	border-radius: 5px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #D3D3D3;
+	width: 49%;
+}
+
+#formButton {
+	border-radius: 5px;
+	float: right;
+	width: 10vw;
+	color: white;
+	background-color: #F08080;
+	padding: 10px;
+	margin-top: 1vh;
+}
+
+#formButtonSmall {
+	border-radius: 5px;
+	float: right;
+	width: 100%;
+	color: white;
+	background-color: #F08080;
+	margin-top: 2vh;
+	padding: 10px;
+}
+
+#small {
+	display: none;
+}
