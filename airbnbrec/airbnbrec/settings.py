@@ -76,7 +76,8 @@ WSGI_APPLICATION = 'airbnbrec.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'airbnb',
+        # 'NAME': 'airbnb',
+        'NAME': 'airbnbsmall',
         'USER': 'postgres',
         'PASSWORD': '#Fang2016',
         'HOST': '127.0.0.1',
