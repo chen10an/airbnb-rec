@@ -33,7 +33,7 @@ activate airbnb-rec
 conda list
 ```
 
-**Generating the production dataset
+**Generating the production dataset**
 
 The production dataset may be downloaded from the website http://insideairbnb.com/get-the-data.html under New York City, New York, United States. The datasets needed are listings.csv and calendar.csv. Both of these files should be converted to .xlsx files.
 
