@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'recommender.apps.RecommenderConfig'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,7 +77,8 @@ WSGI_APPLICATION = 'airbnbrec.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'airbnb',
+        # 'NAME': 'airbnb',
+        'NAME': 'airbnbsmall',
         'USER': 'postgres',
         'PASSWORD': '#Fang2016',
         'HOST': '127.0.0.1',
