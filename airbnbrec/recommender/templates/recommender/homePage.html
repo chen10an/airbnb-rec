@@ -20,7 +20,7 @@ LOW PRIORITY
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
     <!-- Custom CSS -->
     {% load static %}
-    <link rel="stylesheet" href="/static/appy/homePage.css" type="text/css">
+    <link rel="stylesheet" href="/static/recommender/homePage.css" type="text/css">
   	<link rel="icon" href="favicon.png">
   	<!-- JS --> 
 	<title>Airbnb Search Extension</title>
@@ -38,7 +38,7 @@ LOW PRIORITY
 						<span>
 							<label for="where">WHERE</label>
 							<br />
-						  	<select>
+						  	<select name="where">
 								<option>Allerton</option>
 								<option>Arden Heights</option>
 								<option>Arrochar</option>
@@ -274,23 +274,31 @@ LOW PRIORITY
 						</span>
 						<br />
 						<span>
-						<div class="firstTwoFloaterBig">
-						  	<label for="numGuests"># GUESTS</label>
+						  	<div>
+						  	<label>$ PER NIGHT</label>
 						  	<br />
-						  	<input class="third" type="number" name="numGuests" min=1 placeholder=1> 
+						  	<input type="number" name="minPrice" min=1 value=1>
+							<input type="number" name="maxPrice" min=1 value=50>
+						</span>
+						<br />
+						<span>
+						<div class="firstTwoFloaterBig">
+						  	<label for="guests"># GUESTS</label>
+						  	<br />
+						  	<input class="third" type="number" name="guests" min=1 value=1> 
 						</div>
 						<!-- </span>
 						<br />
 						<span> -->
 						<div class="firstTwoFloaterBig">
-						  	<label for="numBeds"># BEDS</label>
+						  	<label for="beds"># BEDS</label>
 						  	<br />
-						  	<input class="third" type="number" name="numBeds" min=1 placeholder=1> 
+						  	<input class="third" type="number" name="beds" min=1 value=1> 
 						</div>
 						<div class="lastFloaterBig">
-						  	<label for="numBedrooms"># BEDROOMS</label>
+						  	<label for="bedrooms"># BEDROOMS</label>
 						  	<br />
-						  	<input class="third" type="number" name="numRooms" min=1 placeholder=1> 
+						  	<input class="third" type="number" name="rooms" min=1 value=1> 
 						</div>
 						<div id="formButtonUnit">
 							<button id="formButton" type="submit">Search</button>
@@ -303,9 +311,9 @@ LOW PRIORITY
 				<div id="formContainerSmall">
 					<form action="./customizePage.html">
 						<span>
-							<label>WHERE</label>
+							<label for="where">WHERE</label>
 							<br />
-						  	<select>
+						  	<select name="where">
 								<option>Allerton</option>
 								<option>Arden Heights</option>
 								<option>Arrochar</option>
@@ -541,23 +549,31 @@ LOW PRIORITY
 							<input type="date" name="checkout">
 						</span>
 						<br />
-						<div class="firstTwoFloaterSmall">
-						  	<label for="guestField"># GUESTS</label>
+						<span>
+						  	<div>
+						  	<label>$ PER NIGHT</label>
 						  	<br />
-						  	<input class="third" type="number" name="numGuests" min=1 placeholder=1> 
+						  	<input type="number" name="minPrice" min=1 value=1>
+							<input type="number" name="maxPrice" min=1 value=50>
+						</span>
+						<br />
+						<div class="firstTwoFloaterSmall">
+						  	<label for="guests"># GUESTS</label>
+						  	<br />
+						  	<input class="third" type="number" name="guests" min=1 value=1> 
 						</div>
 						</span>
 						<!-- <br /> -->
 						<span>
 						<div class="firstTwoFloaterSmall">
-						  	<label for="guestField"># BEDS</label>
+						  	<label for="beds"># BEDS</label>
 						  	<br />
-						  	<input class="third" type="number" name="numBeds" min=1 placeholder=1> 
+						  	<input class="third" type="number" name="beds" min=1 value=1> 
 						</div>
 						<div class="lastFloaterSmall">
-						  	<label for="guestField"># BEDROOMS</label>
+						  	<label for="bedrooms"># BEDROOMS</label>
 						  	<br />
-						  	<input class="third" type="number" name="numRooms" min=1 placeholder=1> 
+						  	<input class="third" type="number" name="rooms" min=1 value=1> 
 						</div>
 						<div id="formButtonUnit">
 							<button id="formButtonSmall" type="submit">Search</button>
@@ -573,6 +589,6 @@ LOW PRIORITY
 	    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-	    <script src="/static/appy/myscripts.js"></script>
+	    <script src="/static/recommender/myscripts.js"></script>
  	</body>
 </html>
