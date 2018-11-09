@@ -1,0 +1,520 @@
+--General Format of queries:
+--required inputs: MINPRICE, MAXPRICE, LASTDATE, FIRSTDATE, NIGHTS, NUMPEOPLE, BEDROOMS, BEDS, NEIGHBORHOOD
+
+-- SELECT DISTINCT id, listing_url
+-- FROM Listing AS l, Offering
+-- WHERE accommodates>=NUMPEOPLE
+-- AND guests_included<=NUMPEOPLE
+-- AND NIGHTS=(SELECT COUNT(*)
+--  FROM Offering
+--  WHERE date_for_stay<=to_date('LASTDATE', 'MM/DD/YYYY')
+--  AND date_for_stay>=to_date('FIRSTDATE', 'MM/DD/YYYY')
+--  AND available='t'
+--  AND listing_id=l.id)
+-- AND MINPRICE::MONEY<=(((NUMPEOPLE-guests_included)*extra_people*NIGHTS)::MONEY + (SELECT SUM(price)
+--  FROM Offering
+--  WHERE date_for_stay<=to_date('LASTDATE', 'MM/DD/YYYY')
+--  AND date_for_stay>=to_date('FIRSTDATE', 'MM/DD/YYYY')
+--  AND listing_id=l.id))
+-- AND MAXPRICE::MONEY>=(((NUMPEOPLE-guests_included)*extra_people*NIGHTS)::MONEY + (SELECT SUM(price)
+--  FROM Offering
+--  WHERE date_for_stay<=to_date('LASTDATE', 'MM/DD/YYYY')
+--  AND date_for_stay>=to_date('FIRSTDATE', 'MM/DD/YYYY')
+--  AND listing_id=l.id))
+-- AND NIGHTS>=minimum_nights
+-- AND NIGHTS<=maximum_nights
+-- AND BEDROOMS<=bedrooms
+-- AND BEDS<=beds
+-- AND 'NEIGHBORHOOD'=neighborhood;
+
+-------------------------------------------------------------------
+/*Test1: Test Query
+All listings returned should accomodate at least 3 people.
+Guests_included should not exceed 3 people.
+The total price of staying at the listing for 5 nights with 3 people
+from 8/1/19-8/5/19 should be between $600 and $700.
+Guests should be able to book the location for the 5 nights above.
+There should be at least 1 bedroom and 2 beds.
+The listing should be in Harlem.
+*/
+
+SELECT DISTINCT id, listing_url
+FROM Listing AS l, Offering
+WHERE accommodates>=3
+AND guests_included<=3
+AND 5=(SELECT COUNT(*)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND available='t'
+  AND listing_id=l.id)
+AND 300::MONEY<=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 900::MONEY>=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 5>=minimum_nights
+AND 5<=maximum_nights
+AND 1<=bedrooms
+AND 2<=beds
+AND 'Harlem'=neighborhood;
+   id   |             listing_url             
+--------+-------------------------------------
+ 342995 | https://www.airbnb.com/rooms/342995
+ 855919 | https://www.airbnb.com/rooms/855919
+ 548815 | https://www.airbnb.com/rooms/548815
+ 385853 | https://www.airbnb.com/rooms/385853
+(4 rows)
+
+-------------------------------------------------------------------
+/*Test2: Test dates available
+The only change in this query from Test1 are the dates being booked.
+The additional listings in the results of this query are those
+that were not available on 12/29/2018 and/or 12/30/2018.
+Note: in other circumstances, changing the dates could also
+cause some listings to leave the price range.
+*/
+SELECT DISTINCT id, listing_url
+FROM Listing AS l, Offering
+WHERE accommodates>=3
+AND guests_included<=3
+AND 5=(SELECT COUNT(*)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/28/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/24/2018', 'MM/DD/YYYY')
+  AND available='t'
+  AND listing_id=l.id)
+AND 300::MONEY<=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/28/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/24/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 900::MONEY>=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/28/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/24/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 5>=minimum_nights
+AND 5<=maximum_nights
+AND 1<=bedrooms
+AND 2<=beds
+AND 'Harlem'=neighborhood;
+   id   |             listing_url             
+--------+-------------------------------------
+ 342995 | https://www.airbnb.com/rooms/342995
+ 548815 | https://www.airbnb.com/rooms/548815
+   8225 | https://www.airbnb.com/rooms/8225
+ 385853 | https://www.airbnb.com/rooms/385853
+   2515 | https://www.airbnb.com/rooms/2515
+ 855919 | https://www.airbnb.com/rooms/855919
+  58059 | https://www.airbnb.com/rooms/58059
+(7 rows)
+
+-------------------------------------------------------------------
+/*Test3: Test minimum_nights
+For the purposes of this query, NIGHTS was changed only
+when checking against minimum_nights and maximum_nights
+so that results could be compared with those from Test1.
+Listings returned should be those from Test1 that can be booked
+for only 1 night. 
+*/
+
+SELECT DISTINCT id, listing_url
+FROM Listing AS l, Offering
+WHERE accommodates>=3
+AND guests_included<=3
+AND 5=(SELECT COUNT(*)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND available='t'
+  AND listing_id=l.id)
+AND 300::MONEY<=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 900::MONEY>=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 1>=minimum_nights
+AND 1<=maximum_nights
+AND 1<=bedrooms
+AND 2<=beds
+AND 'Harlem'=neighborhood;
+   id   |             listing_url             
+--------+-------------------------------------
+ 855919 | https://www.airbnb.com/rooms/855919
+ 548815 | https://www.airbnb.com/rooms/548815
+(2 rows)
+
+-------------------------------------------------------------------
+/*Test4: Test maximum_nights
+For the purposes of this query, NIGHTS was changed only
+when checking against minimum_nights and maximum_nights
+so that results could be compared with those from Test1.
+Listings returned should be those from Test1 that can be booked
+for 22 nights.
+*/
+
+SELECT DISTINCT id, listing_url
+FROM Listing AS l, Offering
+WHERE accommodates>=3
+AND guests_included<=3
+AND 5=(SELECT COUNT(*)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND available='t'
+  AND listing_id=l.id)
+AND 300::MONEY<=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 900::MONEY>=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 22>=minimum_nights
+AND 22<=maximum_nights
+AND 1<=bedrooms
+AND 2<=beds
+AND 'Harlem'=neighborhood;
+   id   |             listing_url             
+--------+-------------------------------------
+ 342995 | https://www.airbnb.com/rooms/342995
+ 855919 | https://www.airbnb.com/rooms/855919
+ 548815 | https://www.airbnb.com/rooms/548815
+(3 rows)
+
+-------------------------------------------------------------------
+/*Test5: Test neighborhood
+Listings should change from those in Test1 due to changing neighborhood.
+Listings should still match the other criteria from Test1
+*/
+
+SELECT DISTINCT id, listing_url
+FROM Listing AS l, Offering
+WHERE accommodates>=3
+AND guests_included<=3
+AND 5=(SELECT COUNT(*)
+  FROM Offering
+  WHERE date_for_stay<=to_date('07/25/2019', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('07/21/2019', 'MM/DD/YYYY')
+  AND available='t'
+  AND listing_id=l.id)
+AND 300::MONEY<=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('07/25/2019', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('07/21/2019', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 900::MONEY>=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('07/25/2019', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('07/21/2019', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 5>=minimum_nights
+AND 5<=maximum_nights
+AND 1<=bedrooms
+AND 2<=beds
+AND 'Park Slope'=neighborhood;
+   id   |             listing_url             
+--------+-------------------------------------
+ 417685 | https://www.airbnb.com/rooms/417685
+  66741 | https://www.airbnb.com/rooms/66741
+   8110 | https://www.airbnb.com/rooms/8110
+   8024 | https://www.airbnb.com/rooms/8024
+  24266 | https://www.airbnb.com/rooms/24266
+ 222054 | https://www.airbnb.com/rooms/222054
+  24261 | https://www.airbnb.com/rooms/24261
+ 856918 | https://www.airbnb.com/rooms/856918
+  24281 | https://www.airbnb.com/rooms/24281
+(9 rows)
+
+-------------------------------------------------------------------
+/*Test6: Test bedrooms
+The only change in this query from Test1 are the minimum number of bedrooms.
+Since all the listings from Test1 have 1 bedroom,
+No listings should be returned from this query.
+*/
+
+SELECT DISTINCT id, listing_url
+FROM Listing AS l, Offering
+WHERE accommodates>=3
+AND guests_included<=3
+AND 5=(SELECT COUNT(*)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND available='t'
+  AND listing_id=l.id)
+AND 300::MONEY<=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 900::MONEY>=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 5>=minimum_nights
+AND 5<=maximum_nights
+AND 2<=bedrooms
+AND 2<=beds
+AND 'Harlem'=neighborhood;
+ id | listing_url 
+----+-------------
+(0 rows)
+
+-------------------------------------------------------------------
+/*Test7: Test beds
+The only change in this query from Test1 are the minimum number of beds.
+Since all the listings from Test1 have 2 beds,
+No listings should be returned from this query.
+*/
+
+SELECT DISTINCT id, listing_url
+FROM Listing AS l, Offering
+WHERE accommodates>=3
+AND guests_included<=3
+AND 5=(SELECT COUNT(*)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND available='t'
+  AND listing_id=l.id)
+AND 300::MONEY<=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 900::MONEY>=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 5>=minimum_nights
+AND 5<=maximum_nights
+AND 1<=bedrooms
+AND 3<=beds
+AND 'Harlem'=neighborhood;
+ id | listing_url 
+----+-------------
+(0 rows)
+
+-------------------------------------------------------------------
+/*Test8: Test beds
+The only change in this query from Test1 are the minimum number of beds.
+Since all the listings from Test1 have 2 beds,
+at least the listings from Test1 should be returned.
+*/
+
+SELECT DISTINCT id, listing_url
+FROM Listing AS l, Offering
+WHERE accommodates>=3
+AND guests_included<=3
+AND 5=(SELECT COUNT(*)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND available='t'
+  AND listing_id=l.id)
+AND 300::MONEY<=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 900::MONEY>=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 5>=minimum_nights
+AND 5<=maximum_nights
+AND 1<=bedrooms
+AND 1<=beds
+AND 'Harlem'=neighborhood;
+   id    |             listing_url              
+---------+--------------------------------------
+  342995 | https://www.airbnb.com/rooms/342995
+  548815 | https://www.airbnb.com/rooms/548815
+  385853 | https://www.airbnb.com/rooms/385853
+  382523 | https://www.airbnb.com/rooms/382523
+  343971 | https://www.airbnb.com/rooms/343971
+  855919 | https://www.airbnb.com/rooms/855919
+  852121 | https://www.airbnb.com/rooms/852121
+ 1072212 | https://www.airbnb.com/rooms/1072212
+  553903 | https://www.airbnb.com/rooms/553903
+(9 rows)
+
+-------------------------------------------------------------------
+/*Test9: Test Price
+The only change in this query from Test1 is the minimum price.
+At least the listings from Test1 should be returned, 
+since we are expanding the price range.
+*/
+
+SELECT DISTINCT id, listing_url
+FROM Listing AS l, Offering
+WHERE accommodates>=3
+AND guests_included<=3
+AND 5=(SELECT COUNT(*)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND available='t'
+  AND listing_id=l.id)
+AND 100::MONEY<=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 900::MONEY>=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 5>=minimum_nights
+AND 5<=maximum_nights
+AND 1<=bedrooms
+AND 2<=beds
+AND 'Harlem'=neighborhood;
+   id   |             listing_url             
+--------+-------------------------------------
+ 342995 | https://www.airbnb.com/rooms/342995
+ 855919 | https://www.airbnb.com/rooms/855919
+ 548815 | https://www.airbnb.com/rooms/548815
+ 385853 | https://www.airbnb.com/rooms/385853
+(4 rows)
+
+-------------------------------------------------------------------
+/*Test10: Test Price
+The only change in this query from Test1 is the maximum price.
+At least the listings from Test1 should be returned, 
+since we are expanding the price range.
+*/
+
+SELECT DISTINCT id, listing_url
+FROM Listing AS l, Offering
+WHERE accommodates>=3
+AND guests_included<=3
+AND 5=(SELECT COUNT(*)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND available='t'
+  AND listing_id=l.id)
+AND 300::MONEY<=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 2000::MONEY>=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 5>=minimum_nights
+AND 5<=maximum_nights
+AND 1<=bedrooms
+AND 2<=beds
+AND 'Harlem'=neighborhood;
+   id   |             listing_url             
+--------+-------------------------------------
+ 342995 | https://www.airbnb.com/rooms/342995
+ 548815 | https://www.airbnb.com/rooms/548815
+ 767397 | https://www.airbnb.com/rooms/767397
+ 385853 | https://www.airbnb.com/rooms/385853
+ 707736 | https://www.airbnb.com/rooms/707736
+ 382524 | https://www.airbnb.com/rooms/382524
+ 855919 | https://www.airbnb.com/rooms/855919
+ 268392 | https://www.airbnb.com/rooms/268392
+ 115678 | https://www.airbnb.com/rooms/115678
+(9 rows)
+
+-------------------------------------------------------------------
+/*Test11: Test Price
+The only change in this query from Test1 is the minimum price.
+Any listings returned should be a subset of those from Test1
+since we are restricting the price range further.
+*/
+
+SELECT DISTINCT id, listing_url
+FROM Listing AS l, Offering
+WHERE accommodates>=3
+AND guests_included<=3
+AND 5=(SELECT COUNT(*)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND available='t'
+  AND listing_id=l.id)
+AND 600::MONEY<=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 900::MONEY>=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 5>=minimum_nights
+AND 5<=maximum_nights
+AND 1<=bedrooms
+AND 2<=beds
+AND 'Harlem'=neighborhood;
+   id   |             listing_url             
+--------+-------------------------------------
+ 855919 | https://www.airbnb.com/rooms/855919
+ 548815 | https://www.airbnb.com/rooms/548815
+ 385853 | https://www.airbnb.com/rooms/385853
+(3 rows)
+
+-------------------------------------------------------------------
+/*Test12: Test Price
+The only change in this query from Test1 is the maximum price.
+Any listings returned should be a subset of those from Test1
+since we are restricting the price range further.
+*/
+
+SELECT DISTINCT id, listing_url
+FROM Listing AS l, Offering
+WHERE accommodates>=3
+AND guests_included<=3
+AND 5=(SELECT COUNT(*)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND available='t'
+  AND listing_id=l.id)
+AND 300::MONEY<=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 700::MONEY>=(((3-guests_included)*extra_people*5)::MONEY + (SELECT SUM(price)
+  FROM Offering
+  WHERE date_for_stay<=to_date('12/30/2018', 'MM/DD/YYYY')
+  AND date_for_stay>=to_date('12/26/2018', 'MM/DD/YYYY')
+  AND listing_id=l.id))
+AND 5>=minimum_nights
+AND 5<=maximum_nights
+AND 1<=bedrooms
+AND 2<=beds
+AND 'Harlem'=neighborhood;
+   id   |             listing_url             
+--------+-------------------------------------
+ 342995 | https://www.airbnb.com/rooms/342995
+(1 row)
+
