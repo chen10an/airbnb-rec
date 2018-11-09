@@ -9,6 +9,8 @@ The data from listings.xlsx can be extracted and inserted into the database usin
 
 Note that this will not work on a computer without access to the database we are using.
 
+Tables for the database may be generated with the creating.sql file.
+
 ### Yelp data
 The production dataset may be queried from `API_HOST = 'https://api.yelp.com'`. Specifically, we are querying yelp business data with the following api parameters (which can be found in `yelp_scrape.py`):
 
