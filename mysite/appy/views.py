@@ -6,3 +6,9 @@ def home(request):
 
 def customize(request):
 	return render(request, 'appy/customizePage.html')
+
+def load(request):
+	return render(request, 'appy/spinnyBoi.html')
+
+def listing(request):
+	return render(request, 'appy/listingDisplayPage.html')

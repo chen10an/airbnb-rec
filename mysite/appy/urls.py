@@ -5,4 +5,6 @@ from . import views
 urlpatterns = [
 	path('', views.home),
 	path('customize', views.customize),
+	path('load', views.load),
+	path('listing', views.listing)
 ]
