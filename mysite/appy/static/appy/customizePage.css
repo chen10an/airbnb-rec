@@ -5,9 +5,9 @@ body, html {
 	font-family: 'Poppins', sans-serif;
 }
 
-#rect1, #rect2, #rect3, #rect4, #rect5, #rect6, #rect7, #rect8, #rect9, #rect10 {
+#rect1, #rect2, #rect3, #rect4, #rect5 {
 	border-radius: 5px;
-	width: 25vw;
+	width: 45vw;
     height: 9vh;
 	padding: 2vh;
 	padding-top: 3vh;
@@ -41,8 +41,8 @@ p {
 /*	padding-top: 5vh;
 */	float: left;
 	padding-left: 5vw;
-	height: 70vh;
-	width: 25vw;
+	height: 55vh;
+	width: 40vw;
 
 	border-radius: 5px;
 	padding: 2vh;
@@ -108,10 +108,10 @@ select {
 
 	border-radius: 5px;
 /*	float: center;
-*/	width: 50%;
+*/	width: 90vw;
 	color: white;
 	background-color: #F08080;
 	margin-top: 2vh;
-	margin-left: 10vw;
-	padding: 10px;
+/*	margin-left: 5vw;
+*/	padding: 10px;
 }
