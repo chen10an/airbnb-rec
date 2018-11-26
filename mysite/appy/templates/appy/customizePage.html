@@ -27,12 +27,13 @@ LOW PRIORITY:
 			<div id="small">
 				<p id="formTitleSmall"> Rank what's most important to you. </p>
 				<div id="formContainerSmall">
-					<form action="./spinnyBoi.html">
+					<form action="load" method="post">
+						{% csrf_token %}
 						<div id="farleft">
 <!-- 						<div id="farleft" ondrop="drop(event)" ondragover="allowDrop(event)">
  -->							<span id="feat1" draggable="true" draggable="true" ondragstart="drag(event)">
-								<label>Cleanliness</label>
-								<select>
+								<label for="diversity">Food Diversity</label>
+								<select name="diversity">
 								<option>Option 1</option>
 								<option>Option 2</option>
 								<option>Option 3</option>
@@ -40,8 +41,8 @@ LOW PRIORITY:
 							</span>
 							<br />
 							<span id="feat2" draggable="true" draggable="true" ondragstart="drag(event)">
-								<label>Check In</label>
-								<select>
+								<label for="cuisine">Cuisine Type</label>
+								<select name="cuisine">
 								<option>Option 1</option>
 								<option>Option 2</option>
 								<option>Option 3</option>
@@ -49,8 +50,8 @@ LOW PRIORITY:
 							</span>
 							<br />
 							<span id="feat3" draggable="true" draggable="true" ondragstart="drag(event)">
-								<label>Host Communication</label>
-								<select>
+								<label for="type">Restaurant Type</label>
+								<select name="type">
 								<option>Option 1</option>
 								<option>Option 2</option>
 								<option>Option 3</option>
@@ -58,8 +59,8 @@ LOW PRIORITY:
 							</span>
 							<br />
 							<span id="feat4" draggable="true" draggable="true" ondragstart="drag(event)">
-								<label>Good Location</label>
-								<select>
+								<label for="price">Price</label>
+								<select name="price">
 								<option>Option 1</option>
 								<option>Option 2</option>
 								<option>Option 3</option>
@@ -67,58 +68,14 @@ LOW PRIORITY:
 							</span>
 							<br />
 							<span id="feat5" draggable="true" draggable="true" ondragstart="drag(event)">
-								<label>Cancellation Ease</label>
-								<select>
+								<label for="diet">Dietary Preference</label>
+								<select for="diet">
 								<option>Option 1</option>
 								<option>Option 2</option>
 								<option>Option 3</option>
 								</select>
 							</span>
 							<br />
-							<span id="feat6" draggable="true" draggable="true" ondragstart="drag(event)">
-								<label>Superhost</label>
-								<select>
-								<option>Option 1</option>
-								<option>Option 2</option>
-								<option>Option 3</option>
-								</select>
-							</span>
-							<br />
-							<span id="feat7" draggable="true" draggable="true" ondragstart="drag(event)">
-								<label>Price Per Person</label>
-								<select>
-								<option>Option 1</option>
-								<option>Option 2</option>
-								<option>Option 3</option>
-								</select>
-							</span>
-							<br />
-							<span id="feat8" draggable="true" draggable="true" ondragstart="drag(event)">
-								<label>Dining</label>
-								<select>
-								<option>Option 1</option>
-								<option>Option 2</option>
-								<option>Option 3</option>
-								</select>
-							</span>
-							<br />
-							<span id="feat9" draggable="true" draggable="true" ondragstart="drag(event)">
-								<label>Nightlife</label>
-								<select>
-								<option>Option 1</option>
-								<option>Option 2</option>
-								<option>Option 3</option>
-								</select>
-							</span>
-							<br />
-							<!-- <span id="feat10" draggable="true" draggable="true" ondragstart="drag(event)">
-								<label>FEATURE 10</label>
-								<select>
-								<option>Option 1</option>
-								<option>Option 2</option>
-								<option>Option 3</option>
-								</select>
-							</span> -->
 						</div>
 						<div id="left">
 							<div id="rect1" ondrop="drop(event)" ondragover="allowDrop(event)">1
