@@ -19,7 +19,7 @@ body, html {
     border-radius: 50%;
     width: 200px;
     height: 200px;
-    animation: spin 3s linear;
+    animation: spin 30s linear;
 
   	position: absolute;
   	margin: auto;

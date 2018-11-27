@@ -31,14 +31,15 @@ LOW PRIORITY:
 						{% csrf_token %}
 						<div id="farleft">
 <!-- 						<div id="farleft" ondrop="drop(event)" ondragover="allowDrop(event)">
- -->							<span id="feat1" draggable="true" draggable="true" ondragstart="drag(event)">
+ -->							<span id="diversity" draggable="true" draggable="true" ondragstart="drag(event)">
+ 								<input type="hidden" name="HIDDENEXAMPLE" value="100" />
 								<label for="diversity">Food Diversity</label>
 								<select name="diversity">
 								<option>High</option>
 								</select>
 							</span>
 							<br />
-							<span id="feat2" draggable="true" draggable="true" ondragstart="drag(event)">
+							<span id="cuisine" draggable="true" draggable="true" ondragstart="drag(event)">
 								<label for="cuisine">Cuisine Type</label>
 								<select name="cuisine">
 								<option>American</option>
@@ -58,7 +59,7 @@ LOW PRIORITY:
 								</select>
 							</span>
 							<br />
-							<span id="feat3" draggable="true" draggable="true" ondragstart="drag(event)">
+							<span id="type" draggable="true" draggable="true" ondragstart="drag(event)">
 								<label for="type">Restaurant Type</label>
 								<select name="type">
 								<option>Bars & Nightlife</option>
@@ -70,7 +71,7 @@ LOW PRIORITY:
 								</select>
 							</span>
 							<br />
-							<span id="feat4" draggable="true" draggable="true" ondragstart="drag(event)">
+							<span id="price" draggable="true" draggable="true" ondragstart="drag(event)">
 								<label for="price">Price</label>
 								<select name="price">
 								<option>$</option>
@@ -80,7 +81,7 @@ LOW PRIORITY:
 								</select>
 							</span>
 							<br />
-							<span id="feat5" draggable="true" draggable="true" ondragstart="drag(event)">
+							<span id="diet" draggable="true" draggable="true" ondragstart="drag(event)">
 								<label for="diet">Dietary Preferences</label>
 								<select name="diet">
 								<option>Gluten-Free</option>
@@ -92,19 +93,19 @@ LOW PRIORITY:
 							<br />
 						</div>
 						<div id="left">
-							<div id="rect1" ondrop="drop(event)" ondragover="allowDrop(event)">1
+							<div id="priority1" ondrop="drop(event)" ondragover="allowDrop(event)">1
 						 	</div>
 <!-- 						 	<br />
- -->						 	<div id="rect2" ondrop="drop(event)" ondragover="allowDrop(event)">2
+ -->						 	<div id="priority2" ondrop="drop(event)" ondragover="allowDrop(event)">2
 						 	</div>
 <!-- 						 	<br />
- -->						 	<div id="rect3" ondrop="drop(event)" ondragover="allowDrop(event)">3
+ -->						 	<div id="priority3" ondrop="drop(event)" ondragover="allowDrop(event)">3
 						 	</div>
 <!-- 						 	<br />
- -->						 	<div id="rect4" ondrop="drop(event)" ondragover="allowDrop(event)">4
+ -->						 	<div id="priority4" ondrop="drop(event)" ondragover="allowDrop(event)">4
 						 	</div>
 <!-- 						 	<br />
- -->						 	<div id="rect5" ondrop="drop(event)" ondragover="allowDrop(event)">5
+ -->						 	<div id="priority5" ondrop="drop(event)" ondragover="allowDrop(event)">5
 						 	</div>
 <!-- 						 	<br />
  -->					</div>
