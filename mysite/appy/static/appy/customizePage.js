@@ -16,6 +16,7 @@ function drop(ev) {
     // }
     ev.target.appendChild(pointA);
     ev.target.setAttribute("style", "padding-top: 2vh");
-    console.log(pointA.id)
-    console.log(pointA.parentNode.id);
+    document.getElementById("priority"+pointA.parentNode.id.charAt(4)).value = pointA.id;
+    // console.log(pointA.id)
+    //console.log("priority"+pointA.parentNode.id.charAt(4));
 }

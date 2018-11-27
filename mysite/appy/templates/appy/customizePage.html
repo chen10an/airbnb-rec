@@ -1,9 +1,9 @@
 <!-- TODO: 
-HIGH PRIORITY: 
+HIGH: 
 * How to return rankings
-* Fix undo / dragging and dropping over already-filled rectangle
+* Fix undo / dragging and dropping over already-filledangle
 
-LOW PRIORITY:
+LOW:
 * Consider how to accomodate narrower screen size
  -->
 <!DOCTYPE html>
@@ -32,7 +32,6 @@ LOW PRIORITY:
 						<div id="farleft">
 <!-- 						<div id="farleft" ondrop="drop(event)" ondragover="allowDrop(event)">
  -->							<span id="diversity" draggable="true" draggable="true" ondragstart="drag(event)">
- 								<input type="hidden" name="HIDDENEXAMPLE" value="100" />
 								<label for="diversity">Food Diversity</label>
 								<select name="diversity">
 								<option>High</option>
@@ -93,22 +92,27 @@ LOW PRIORITY:
 							<br />
 						</div>
 						<div id="left">
-							<div id="priority1" ondrop="drop(event)" ondragover="allowDrop(event)">1
+							<div id="rect1" ondrop="drop(event)" ondragover="allowDrop(event)">1
 						 	</div>
 <!-- 						 	<br />
- -->						 	<div id="priority2" ondrop="drop(event)" ondragover="allowDrop(event)">2
+ -->						 	<div id="rect2" ondrop="drop(event)" ondragover="allowDrop(event)">2
 						 	</div>
 <!-- 						 	<br />
- -->						 	<div id="priority3" ondrop="drop(event)" ondragover="allowDrop(event)">3
+ -->						 	<div id="rect3" ondrop="drop(event)" ondragover="allowDrop(event)">3
 						 	</div>
 <!-- 						 	<br />
- -->						 	<div id="priority4" ondrop="drop(event)" ondragover="allowDrop(event)">4
+ -->						 	<div id="rect4" ondrop="drop(event)" ondragover="allowDrop(event)">4
 						 	</div>
 <!-- 						 	<br />
- -->						 	<div id="priority5" ondrop="drop(event)" ondragover="allowDrop(event)">5
+ -->						 	<div id="rect5" ondrop="drop(event)" ondragover="allowDrop(event)">5
 						 	</div>
 <!-- 						 	<br />
  -->					</div>
+ <input type="hidden" id="priority1" name="priority1"/>
+ <input type="hidden" id="priority2" name="priority2"/>
+ <input type="hidden" id="priority3" name="priority3"/>
+ <input type="hidden" id="priority4" name="priority4"/>
+ <input type="hidden" id="priority5" name="priority5"/>
 						<span id="formButtonUnit">
 							<button id="formButtonSmall" type="submit">Find Listing</button>
 						</span>
