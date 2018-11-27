@@ -5,7 +5,6 @@ HIGH PRIORITY
 * Add: Price range, # bedrooms, # beds
 * Figure out redirects
 * Where to host site
-
 LOW PRIORITY
 * Logo/north star on upper left hand side -->
 <!DOCTYPE html>
@@ -34,9 +33,7 @@ LOW PRIORITY
 			<div id="big">
 				<div id="formContainer">
 					<p id="formTitle"> Book your NYC stay. </p>
-					<form action="./topMatches/" method="post">
-					<!-- <form action="." method="post"> -->
-					<!-- <form action="./customizePage/" method="post"> -->
+					<form action="customize" method="post"> 
 						{% csrf_token %}
 						<span>
 							<label for="where">WHERE</label>
@@ -312,9 +309,7 @@ LOW PRIORITY
 			<div id="small">
 				<p id="formTitleSmall"> Book unique homes in NYC. </p>
 				<div id="formContainerSmall">
-					<form action="./topMatches/" method="post">
-					<!-- <form action="." method="post"> -->
-					<!-- <form action="./customizePage/"> -->
+					<form action="customize" method="post">
 						{% csrf_token %}
 						<span>
 							<label for="where">WHERE</label>
