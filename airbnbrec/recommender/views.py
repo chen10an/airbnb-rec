@@ -6,6 +6,14 @@ from .models import Listing, Offering
 def home(request):
 	return render(request, 'recommender/homePage.html')
 
+def customize(request):
+	return render(request, 'recommender/customizePage.html')
+
+def load(request):
+	return render(request, 'recommender/spinnyBoi.html')
+
+def listing(request):
+	return render(request, 'recommender/listingDisplayPage.html')
 
 def simple(request):
 	top_listings=Listing.objects.order_by('-id')[:5] #we can change this to order by match_weight later	
