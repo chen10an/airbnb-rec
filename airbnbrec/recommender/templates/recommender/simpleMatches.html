@@ -1,6 +1,16 @@
 <h1>Top 5 Matches in Database:</h1>
-<ul>
-{% for match in matches %}
-    <li><a{{ listing.listing_url }}></li>
+<!-- <ul>
+{% for listing in top_listings %}
+    <li><a{listing.listing_url}></li>
 {% endfor %}
-</ul>
+</ul> -->
+{% if top_listings %}
+    <ul>
+    {% for listing in top_listings %}
+        <!-- <li><a href="/recommender/{{ listing.id }}/">{{ listing.listing_url }}</a></li> -->
+        <li><a href="{{ listing.listing_url }}">{{ listing.listing_url }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
