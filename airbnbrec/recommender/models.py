@@ -33,3 +33,19 @@ class Offering(models.Model):
         managed = False
         db_table = 'offering'
         unique_together = (('listing_id', 'date_for_stay'),)
+
+class Business(models.Model):
+    id = models.TextField(primary_key=True)
+    weight = models.FloatField(blank=True, null=True)
+    name = models.TextField()
+    url = models.TextField()
+    price = models.TextField(blank=True, null=True)
+    rating = models.FloatField()
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    category = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = 'business'
+        unique_together = (('id', 'category'),)
