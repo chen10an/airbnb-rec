@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import Listing, Offering
+from datetime import datetime
 
 def home(request):
 	return render(request, 'recommender/homePage.html')
@@ -10,8 +11,10 @@ def customize(request):
 	if request.method == 'POST':
 		#read information from the POST
 		request.session['neighborhood']=request.POST['where']
-		request.session['checkin']=request.POST['checkin']
-		request.session['checkout']=request.POST['checkout']
+		checkin = request.POST['checkin']
+		checkout = request.POST['checkout']
+		request.session['checkin']=checkin
+		request.session['checkout']=checkout
 		minPriceNight=request.POST['minPrice']
 		maxPriceNight=request.POST['maxPrice']
 		request.session['numGuests']=request.POST['guests']
@@ -21,12 +24,13 @@ def customize(request):
 		checkinDate=datetime.strptime(checkin, '%Y-%m-%d')
 		checkoutDate=datetime.strptime(checkout, '%Y-%m-%d')
 		daysbetween=checkoutDate-checkinDate
-		request.session['nights']=daysbetween.days+1 #inclusive
+		nights = daysbetween.days+1 #inclusive
+		request.session['nights']=nights
 		#find total min and max price for entire stay
 		request.session['minPrice']=int(minPriceNight)*nights
 		request.session['maxPrice']=int(maxPriceNight)*nights
 
-		return render(request, 'recommender/customizePage.html', context)
+		return render(request, 'recommender/customizePage.html')
 	return render(request, 'recommender/homePage.html') #need to change this to retry submit if POST didn't send
 
 def load(request):
