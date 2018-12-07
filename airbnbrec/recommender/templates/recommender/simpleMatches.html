@@ -1,6 +1,11 @@
-<h1>Top 5 Matches in Database:</h1>
-<ul>
-{% for match in matches %}
-    <li><a{{ listing.listing_url }}></li>
-{% endfor %}
-</ul>
+<h1>Matching Airbnb Listings in Database:</h1>
+{% if matches %}
+    <ul>
+    {% for match in matches %}
+        <li><a href="{{ match.listing_url }}">{{ match.listing_url }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No matches are available. Try again with some different search parameters.</p>
+    <a href="http://127.0.0.1:8000/recommender/">Search Again</a>
+{% endif %}

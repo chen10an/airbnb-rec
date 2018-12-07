@@ -52,7 +52,7 @@ def listing(request):
 		name = request.POST['name']
 		price = request.POST['price']
 		diet = request.POST['diet']
-		
+		return render(request, 'recommender/simpleMatches.html', context)
 	return render(request, 'recommender/listingDisplayPage.html')
 
 def simple(request):
