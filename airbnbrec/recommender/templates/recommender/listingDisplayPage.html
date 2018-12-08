@@ -28,7 +28,8 @@
 							<img class="fulfilled" src="https://freeiconshop.com/wp-content/uploads/edd/checkmark-flat.png">
 							<label>Cuisine Type</label>
 							<select disabled="true">
-							<option>Mediterannean</option>
+							<option>{{ cuisine }}</option>
+							<!-- <option>Mediterannean</option> -->
 							<!-- <option>Option 2</option>
 							<option>Option 3</option> -->
 							</select>
@@ -37,7 +38,7 @@
 							<img class="fulfilled" src="https://freeiconshop.com/wp-content/uploads/edd/checkmark-flat.png">
 							<label>Dietary Preferences</label>
 							<select disabled="true">
-							<option>Vegan</option>
+							<option>{{ diet }}</option>
 							<!-- <option>Option 2</option>
 							<option>Option 3</option> -->
 							</select>
@@ -46,7 +47,7 @@
  							<img class="fulfilled" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Close-512.png">
 							<label>Price</label>
 							<select disabled="true">
-							<option>$$</option>
+							<option>{{ foodPrice }}</option>
 							<!-- <option>Option 2</option>
 							<option>Option 3</option> -->
 							</select>
@@ -55,7 +56,7 @@
 							<img class="fulfilled" src="https://freeiconshop.com/wp-content/uploads/edd/checkmark-flat.png">
 							<label>Restaurant Type</label>
 							<select disabled="true">
-							<option>Study Cafes</option>
+							<option>{{ restaurant }}</option>
 							<!-- <option>Option 2</option>
 							<option>Option 3</option> -->
 							</select>
@@ -64,13 +65,13 @@
 							<img class="fulfilled" src="https://freeiconshop.com/wp-content/uploads/edd/checkmark-flat.png">
 							<label>Food Diversity</label>
 							<select disabled="true">
-							<option>High</option>
+							<option>{{ diversity }}</option>
 							<!-- <option>Option 2</option>
 							<option>Option 3</option> -->
 							</select>
 						</div>
 					</div>
-						<button onclick=" window.open('https://www.airbnb.com/rooms/10036313?s=51','_blank')">Let me see it</button>
+						<button onclick=" window.open('{{ listingurl }}')">Let me see it</button>
 						<button onclick=" window.open('load','_blank')">Show me another</button>
 					</div>
 				</div>

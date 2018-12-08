@@ -39,7 +39,7 @@ def load(request):
 	if request.method == 'POST':
 		request.session['diversity'] = request.POST['diversity']
 		request.session['cuisine'] = request.POST['cuisine']
-		request.session['foodType'] = request.POST['type']
+		request.session['restaurant'] = request.POST['type']
 		request.session['foodPrice'] = request.POST['price']
 		request.session['diet'] = request.POST['diet']
 
@@ -60,18 +60,26 @@ def listing(request):
 	#retrieve user input for food
 	diversity = request.session.get('diversity')
 	cuisine = request.session.get('cuisine')
-	foodType = request.session.get('foodType')
+	restaurant = request.session.get('restaurant')
 	foodPrice = request.session.get('foodPrice')
 	diet = request.session.get('diet')
-
 	#run the SQL query using these parameters and give the results to match page
+	# matches=Listing.objects.raw("SELECT DISTINCT id, listing_url FROM Listing AS l, Offering WHERE %s=neighborhood AND accommodates>=%s AND guests_included<=%s AND %s=(SELECT COUNT(*) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND available='t' AND listing_id=l.id) AND %s::MONEY<=(((%s-guests_included)*extra_people*%s)::MONEY + (SELECT SUM(price) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND listing_id=l.id)) AND %s::MONEY>=(((%s-guests_included)*extra_people*%s)::MONEY + (SELECT SUM(price) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND listing_id=l.id)) AND %s>=minimum_nights AND %s<=maximum_nights AND %s<=bedrooms AND %s<=beds", [neighborhood, numGuests, numGuests, nights, checkout, checkin, minPrice, numGuests, nights, checkout, checkin, maxPrice, numGuests, nights, checkout, checkin, nights, nights, numRooms, numBeds])
+	# context = {'matches': matches}
 	matches=Listing.objects.raw("SELECT DISTINCT id, listing_url FROM Listing AS l, Offering WHERE %s=neighborhood AND accommodates>=%s AND guests_included<=%s AND %s=(SELECT COUNT(*) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND available='t' AND listing_id=l.id) AND %s::MONEY<=(((%s-guests_included)*extra_people*%s)::MONEY + (SELECT SUM(price) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND listing_id=l.id)) AND %s::MONEY>=(((%s-guests_included)*extra_people*%s)::MONEY + (SELECT SUM(price) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND listing_id=l.id)) AND %s>=minimum_nights AND %s<=maximum_nights AND %s<=bedrooms AND %s<=beds", [neighborhood, numGuests, numGuests, nights, checkout, checkin, minPrice, numGuests, nights, checkout, checkin, maxPrice, numGuests, nights, checkout, checkin, nights, nights, numRooms, numBeds])
-	context = {'matches': matches}
+	matches=list(matches)
+	context = {'diversity': diversity, 'cuisine': cuisine, 'restaurant':restaurant, 'foodPrice':foodPrice, 'diet':diet, 'listingurl':matches[0].listing_url}
 
-	return render(request, 'recommender/simpleMatches.html', context)
-	# return render(request, 'recommender/listingDisplayPage.html')
+	# return render(request, 'recommender/simpleMatches.html', context)
+	return render(request, 'recommender/listingDisplayPage.html', context)
 
 def simple(request):
 	top_listings=Listing.objects.order_by('-id')[:5] #we can change this to order by match_weight later	
 	context = {'top_listings': top_listings}
 	return render(request, 'recommender/simple.html', context) 
+
+"""
+For each listing in matches, get all businesses within distance.
+diversity = SELECT COUNT(*) FROM view
+cuisine = 
+"""
