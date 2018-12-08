@@ -81,9 +81,9 @@ DATABASES = {
         # 'NAME': 'airbnbsmall',
         'USER': 'postgres',
         'PASSWORD': '#Fang2016',
-        # 'HOST': '127.0.0.1',
-        'HOST': '10.197.82.77',
-        'PORT': '5432'
+        'HOST': '127.0.0.1',
+        # 'HOST': '10.197.82.77',
+        # 'PORT': '5432'
     }
 }
 
