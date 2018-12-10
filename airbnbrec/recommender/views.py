@@ -42,6 +42,18 @@ def load(request):
 		request.session['restaurant'] = request.POST['type']
 		request.session['foodPrice'] = request.POST['price']
 		request.session['diet'] = request.POST['diet']
+		request.session['p1'] = request.POST['priority1']
+		request.session['p2'] = request.POST['priority2']
+		request.session['p3'] = request.POST['priority3']
+		request.session['p4'] = request.POST['priority4']
+		request.session['p5'] = request.POST['priority5']
+		# p1=request.POST['priority1']
+		# p2=request.POST['priority2']
+		# p3=request.POST['priority3']
+		# p4=request.POST['priority4']
+		# p5=request.POST['priority5']
+		# context={'p1':p1, 'p2':p2, 'p3':p3, 'p4':p4, 'p5':p5}
+		# return render(request, 'recommender/simpleMatches.html', context)
 
 	return render(request, 'recommender/spinnyBoi.html')
 
@@ -63,6 +75,15 @@ def listing(request):
 	restaurant = request.session.get('restaurant')
 	foodPrice = request.session.get('foodPrice')
 	diet = request.session.get('diet')
+
+	#retrieve user ranking of the Yelp options above
+	#can be the strings "cuisine", "diversity", "diet", "price", and "type"
+	p1 = request.session.get('p1')
+	p2 = request.session.get('p2')
+	p3 = request.session.get('p3')
+	p4 = request.session.get('p4')
+	p5 = request.session.get('p5')
+
 	#run the SQL query using these parameters and give the results to match page
 	# matches=Listing.objects.raw("SELECT DISTINCT id, listing_url FROM Listing AS l, Offering WHERE %s=neighborhood AND accommodates>=%s AND guests_included<=%s AND %s=(SELECT COUNT(*) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND available='t' AND listing_id=l.id) AND %s::MONEY<=(((%s-guests_included)*extra_people*%s)::MONEY + (SELECT SUM(price) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND listing_id=l.id)) AND %s::MONEY>=(((%s-guests_included)*extra_people*%s)::MONEY + (SELECT SUM(price) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND listing_id=l.id)) AND %s>=minimum_nights AND %s<=maximum_nights AND %s<=bedrooms AND %s<=beds", [neighborhood, numGuests, numGuests, nights, checkout, checkin, minPrice, numGuests, nights, checkout, checkin, maxPrice, numGuests, nights, checkout, checkin, nights, nights, numRooms, numBeds])
 	# context = {'matches': matches}
