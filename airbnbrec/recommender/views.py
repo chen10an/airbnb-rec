@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import Listing, Offering, Business
 from datetime import datetime
+from operator import itemgetter
 
 def home(request):
 	return render(request, 'recommender/homePage.html')
@@ -78,14 +79,17 @@ def listing(request):
 	p5 = request.session.get('p5')
 
 	#run the SQL query using these parameters and give the results to match page
-	matches=Listing.objects.raw("SELECT DISTINCT id, listing_url FROM Listing AS l, Offering WHERE %s=neighborhood AND accommodates>=%s AND guests_included<=%s AND %s=(SELECT COUNT(*) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND available='t' AND listing_id=l.id) AND %s::MONEY<=(((%s-guests_included)*extra_people*%s)::MONEY + (SELECT SUM(price) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND listing_id=l.id)) AND %s::MONEY>=(((%s-guests_included)*extra_people*%s)::MONEY + (SELECT SUM(price) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND listing_id=l.id)) AND %s>=minimum_nights AND %s<=maximum_nights AND %s<=bedrooms AND %s<=beds", [neighborhood, numGuests, numGuests, nights, checkout, checkin, minPrice, numGuests, nights, checkout, checkin, maxPrice, numGuests, nights, checkout, checkin, nights, nights, numRooms, numBeds])
+	matches=Listing.objects.raw("SELECT DISTINCT id, listing_url, name, description, neighborhood, accommodates,  FROM Listing AS l, Offering WHERE %s=neighborhood AND accommodates>=%s AND guests_included<=%s AND %s=(SELECT COUNT(*) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND available='t' AND listing_id=l.id) AND %s::MONEY<=(((%s-guests_included)*extra_people*%s)::MONEY + (SELECT SUM(price) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND listing_id=l.id)) AND %s::MONEY>=(((%s-guests_included)*extra_people*%s)::MONEY + (SELECT SUM(price) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND listing_id=l.id)) AND %s>=minimum_nights AND %s<=maximum_nights AND %s<=bedrooms AND %s<=beds", [neighborhood, numGuests, numGuests, nights, checkout, checkin, minPrice, numGuests, nights, checkout, checkin, maxPrice, numGuests, nights, checkout, checkin, nights, nights, numRooms, numBeds])
 	matches=list(matches)	
+	# if len(matches)==0:
 
-	maxscore=0
-	toplisting=''
+
+	# maxscore=0
+	# toplisting=''
+	listings=[]
 	for i in range(len(matches)):
-		allbusinesses= Business.objects.raw("SELECT * FROM Business WHERE 2 * 3961 * asin( sqrt((sin( radians(  (%s - Business.latitude) / 2 ))) ^ 2  + cos(radians(%s)) * cos(radians(Business.latitude)) * (sin( radians((%s - Business.longitude) / 2) ) ) ^ 2) )   < 5", [matches[i].latitude, matches[i].latitude, matches[i].longitude])
-		
+		# allbusinesses= Business.objects.raw("SELECT * FROM Business WHERE 2 * 3961 * asin( sqrt((sin( radians(  (%s - Business.latitude) / 2 ))) ^ 2  + cos(radians(%s)) * cos(radians(Business.latitude)) * (sin( radians((%s - Business.longitude) / 2) ) ) ^ 2) )   < 5", [matches[i].latitude, matches[i].latitude, matches[i].longitude])
+		allbusinesses= Business.objects.raw("SELECT * FROM Business sqrt((1545049/324 * SQUARE(%s- Business.latitude))+(620059801/129600*SQUARE( (%s - Business.longitude) * cos( (%s+ Business.latitude)/2 ))) ) < 1", [matches[i].latitude, matches[i].longitude, matches[i].latitude])
 		allbusinesses=list(allbusinesses)
 		businesscount= len(allbusinesses)
 		
@@ -168,10 +172,15 @@ def listing(request):
 		if p5=='price':
 		 	wp=.1
 
-		score= wc* cuisinecount/businesscount + wr*restaurantcount/businesscount+ wdv*diversitycount/businesscount+wd*dietcount/businesscount+ wp*pricecount/businesscount
-		if score>=maxscore:
-			maxscore=score
-			toplisting=matches[i].listing_url
+		score= wc* cuisinecount/businesscount + wr*restaurantcount/businesscount+ wdv*diversitycount/113+wd*dietcount/businesscount+ wp*pricecount/businesscount
+		# if score>=maxscore:
+		# 	maxscore=score
+		# 	toplisting=matches[i].listing_url
+		listings.append((matches[i], score))
+	listings.sort(key=itemgetter(1), reverse=True)
 
-	context = {'diversity': diversity, 'cuisine': cuisine, 'restaurant':restaurant, 'foodPrice':foodPrice, 'diet':diet, 'listingurl':toplisting}
-	return render(request, 'recommender/listingDisplayPage.html', context)
+
+	context={'listings':listings}
+	return render(request, 'recommender/simpleMatches.html', context)
+	# context = {'diversity': diversity, 'cuisine': cuisine, 'restaurant':restaurant, 'foodPrice':foodPrice, 'diet':diet, 'listingurl':toplisting}
+	# return render(request, 'recommender/listingDisplayPage.html', context)
