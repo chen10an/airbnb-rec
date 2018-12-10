@@ -22,6 +22,18 @@ date_for_stay DATE NOT NULL,
 available CHAR(1) NOT NULL CHECK (available='t' OR available='f'),
 price MONEY,
 PRIMARY KEY(listing_id, date_for_stay));
+
+CREATE TABLE Business
+(id TEXT NOT NULL,
+weight REAL,
+name TEXT NOT NULL,
+url TEXT NOT NULL,
+price TEXT CHECK (price='$' OR price='$$' OR price='$$$' OR price='$$$$' OR price=NULL),
+rating REAL NOT NULL,
+latitude REAL NOT NULL,
+longitude REAL NOT NULL,
+category TEXT NOT NULL,
+PRIMARY KEY(id, category));
 -------------------------------------------------------------------
 --Create triggers for inserts, updates, and deletes
 CREATE FUNCTION TF_ListingIdAlreadyExists() RETURNS TRIGGER AS $$
