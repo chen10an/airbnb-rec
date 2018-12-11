@@ -49,7 +49,7 @@ def load(request):
 		request.session['p4'] = request.POST['priority4']
 		request.session['p5'] = request.POST['priority5']
 
-	return render(request, 'recommender/spinnyBoi.html')
+	return render(request, 'recommender/listingDisplayPage.html')
 
 def listing(request):
 	#retrieve user input for airbnb listing
