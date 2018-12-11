@@ -12,3 +12,6 @@ def load(request):
 
 def listing(request):
 	return render(request, 'appy/listingDisplayPage.html')
+
+def nolisting(request):
+	return render(request, 'appy/noListingPage.html')
