@@ -64,32 +64,45 @@ def listing(request):
 	maxPrice = request.session.get('maxPrice')
 	
 	#retrieve user input for food
-	diversity = request.session.get('diversity')
-	cuisine = request.session.get('cuisine')
-	restaurant = request.session.get('restaurant')
-	foodPrice = request.session.get('foodPrice')
-	diet = request.session.get('diet')
+	# diversity = request.session.get('diversity')
+	# cuisine = request.session.get('cuisine')
+	# restaurant = request.session.get('restaurant')
+	# foodPrice = request.session.get('foodPrice')
+	# diet = request.session.get('diet')
 
-	#retrieve user ranking of the Yelp options above
-	#can be the strings "cuisine", "diversity", "diet", "price", and "type"
-	p1 = request.session.get('p1')
-	p2 = request.session.get('p2')
-	p3 = request.session.get('p3')
-	p4 = request.session.get('p4')
-	p5 = request.session.get('p5')
+	# #retrieve user ranking of the Yelp options above
+	# #can be the strings "cuisine", "diversity", "diet", "price", and "type"
+	# p1 = request.session.get('p1')
+	# p2 = request.session.get('p2')
+	# p3 = request.session.get('p3')
+	# p4 = request.session.get('p4')
+	# p5 = request.session.get('p5')
+
+	if request.method == 'POST':
+		diversity= request.POST['diversity']
+		cuisine= request.POST['cuisine']
+		restaurant= request.POST['type']
+		foodPrice= request.POST['price']
+		diet= request.POST['diet']
+		p1= request.POST['priority1']
+		p2= request.POST['priority2']
+		p3= request.POST['priority3']
+		p4= request.POST['priority4']
+		p5= request.POST['priority5']
 
 	#run the SQL query using these parameters and give the results to match page
-	matches=Listing.objects.raw("SELECT DISTINCT id, listing_url, name, description, neighborhood, accommodates,  FROM Listing AS l, Offering WHERE %s=neighborhood AND accommodates>=%s AND guests_included<=%s AND %s=(SELECT COUNT(*) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND available='t' AND listing_id=l.id) AND %s::MONEY<=(((%s-guests_included)*extra_people*%s)::MONEY + (SELECT SUM(price) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND listing_id=l.id)) AND %s::MONEY>=(((%s-guests_included)*extra_people*%s)::MONEY + (SELECT SUM(price) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND listing_id=l.id)) AND %s>=minimum_nights AND %s<=maximum_nights AND %s<=bedrooms AND %s<=beds", [neighborhood, numGuests, numGuests, nights, checkout, checkin, minPrice, numGuests, nights, checkout, checkin, maxPrice, numGuests, nights, checkout, checkin, nights, nights, numRooms, numBeds])
+	matches=Listing.objects.raw("SELECT DISTINCT id, listing_url, name, description, neighborhood, accommodates FROM Listing AS l, Offering WHERE %s=neighborhood AND accommodates>=%s AND guests_included<=%s AND %s=(SELECT COUNT(*) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND available='t' AND listing_id=l.id) AND %s::MONEY<=(((%s-guests_included)*extra_people*%s)::MONEY + (SELECT SUM(price) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND listing_id=l.id)) AND %s::MONEY>=(((%s-guests_included)*extra_people*%s)::MONEY + (SELECT SUM(price) FROM Offering WHERE date_for_stay<=%s AND date_for_stay>=%s AND listing_id=l.id)) AND %s>=minimum_nights AND %s<=maximum_nights AND %s<=bedrooms AND %s<=beds", [neighborhood, numGuests, numGuests, nights, checkout, checkin, minPrice, numGuests, nights, checkout, checkin, maxPrice, numGuests, nights, checkout, checkin, nights, nights, numRooms, numBeds])
 	matches=list(matches)	
-	# if len(matches)==0:
+	if len(matches)==0:
+		return render(request, 'recommender/noListingPage.html')
 
 
 	# maxscore=0
 	# toplisting=''
 	listings=[]
 	for i in range(len(matches)):
-		# allbusinesses= Business.objects.raw("SELECT * FROM Business WHERE 2 * 3961 * asin( sqrt((sin( radians(  (%s - Business.latitude) / 2 ))) ^ 2  + cos(radians(%s)) * cos(radians(Business.latitude)) * (sin( radians((%s - Business.longitude) / 2) ) ) ^ 2) )   < 5", [matches[i].latitude, matches[i].latitude, matches[i].longitude])
-		allbusinesses= Business.objects.raw("SELECT * FROM Business sqrt((1545049/324 * SQUARE(%s- Business.latitude))+(620059801/129600*SQUARE( (%s - Business.longitude) * cos( (%s+ Business.latitude)/2 ))) ) < 1", [matches[i].latitude, matches[i].longitude, matches[i].latitude])
+		allbusinesses= Business.objects.raw("SELECT * FROM Business WHERE 2 * 3961 * asin( sqrt((sin( radians(  (%s - Business.latitude) / 2 ))) ^ 2  + cos(radians(%s)) * cos(radians(Business.latitude)) * (sin( radians((%s - Business.longitude) / 2) ) ) ^ 2) )   < 5", [matches[i].latitude, matches[i].latitude, matches[i].longitude])
+		# allbusinesses= Business.objects.raw("SELECT * FROM Business sqrt((1545049/324 * SQUARE(%s- Business.latitude))+(620059801/129600*SQUARE( (%s - Business.longitude) * cos( (%s+ Business.latitude)/2 ))) ) < 1", [matches[i].latitude, matches[i].longitude, matches[i].latitude])
 		allbusinesses=list(allbusinesses)
 		businesscount= len(allbusinesses)
 		
@@ -181,9 +194,9 @@ def listing(request):
 
 
 	context={'listings':listings}
-	return render(request, 'recommender/simpleMatches.html', context)
+	# return render(request, 'recommender/simpleMatches.html', context)
 	# context = {'diversity': diversity, 'cuisine': cuisine, 'restaurant':restaurant, 'foodPrice':foodPrice, 'diet':diet, 'listingurl':toplisting}
-	# return render(request, 'recommender/listingDisplayPage.html', context)
+	return render(request, 'recommender/listingDisplayPage.html', context)
 
 def nolisting(request):
 	return render(request, 'recommender/noListingPage.html')
