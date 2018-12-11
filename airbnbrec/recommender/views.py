@@ -184,3 +184,6 @@ def listing(request):
 	return render(request, 'recommender/simpleMatches.html', context)
 	# context = {'diversity': diversity, 'cuisine': cuisine, 'restaurant':restaurant, 'foodPrice':foodPrice, 'diet':diet, 'listingurl':toplisting}
 	# return render(request, 'recommender/listingDisplayPage.html', context)
+
+def nolisting(request):
+	return render(request, 'recommender/noListingPage.html')
