@@ -101,8 +101,8 @@ def listing(request):
 	# toplisting=''
 	listings=[]
 	for i in range(len(matches)):
-		allbusinesses= Business.objects.raw("SELECT * FROM Business WHERE 2 * 3961 * asin( sqrt((sin( radians(  (%s - Business.latitude) / 2 ))) ^ 2  + cos(radians(%s)) * cos(radians(Business.latitude)) * (sin( radians((%s - Business.longitude) / 2) ) ) ^ 2) )   < 5", [matches[i].latitude, matches[i].latitude, matches[i].longitude])
-		# allbusinesses= Business.objects.raw("SELECT * FROM Business sqrt((1545049/324 * SQUARE(%s- Business.latitude))+(620059801/129600*SQUARE( (%s - Business.longitude) * cos( (%s+ Business.latitude)/2 ))) ) < 1", [matches[i].latitude, matches[i].longitude, matches[i].latitude])
+		# allbusinesses= Business.objects.raw("SELECT * FROM Business WHERE 2 * 3961 * asin( sqrt((sin( radians(  (%s - Business.latitude) / 2 ))) ^ 2  + cos(radians(%s)) * cos(radians(Business.latitude)) * (sin( radians((%s - Business.longitude) / 2) ) ) ^ 2) )   < 5", [matches[i].latitude, matches[i].latitude, matches[i].longitude])
+		allbusinesses= Business.objects.raw("SELECT * FROM Business WHERE SQRT((1545049/324 * (%s - Business.latitude) * (%s - Business.latitude)) + (620059801/129600 * (%s - Business.longitude) * COS((%s + Business.latitude)/2) * (%s - Business.longitude) * COS((%s + Business.latitude)/2))) < 1.5;", [matches[i].latitude, matches[i].latitude, matches[i].longitude, matches[i].latitude, matches[i].longitude, matches[i].latitude])
 		allbusinesses=list(allbusinesses)
 		businesscount= len(allbusinesses)
 		
@@ -130,60 +130,60 @@ def listing(request):
 		wp=0
 
 		if p1=='cuisine':
-		 	wc=.3
+			wc=.3
 		if p2=='cuisine':
-		 	wc=.25	
+			wc=.25	
 		if p3=='cuisine':
-		 	wc=.2
+			wc=.2
 		if p4=='cuisine':
-		 	wc=.15
+			wc=.15
 		if p5=='cuisine':
-		 	wc=.1
+			wc=.1
 
 		if p1=='restaurant':
-		 	wr=.3
+			wr=.3
 		if p2=='restaurant':
-		 	wr=.25	
+			wr=.25	
 		if p3=='restaurant':
-		 	wr=.2
+			wr=.2
 		if p4=='restaurant':
-		 	wr=.15
+			wr=.15
 		if p5=='restaurant':
-		 	wr=.1
+			wr=.1
 
 		if p1=='diet':
-		 	wd=.3
+			wd=.3
 		if p2=='diet':
-		 	wd=.25	
+			wd=.25	
 		if p3=='diet':
-		 	wd=.2
+			wd=.2
 		if p4=='diet':
-		 	wd=.15
+			wd=.15
 		if p5=='diet':
-		 	wd=.1
+			wd=.1
 
 		if p1=='diversity':
-		 	wdv=.3
+			wdv=.3
 		if p2=='diversity':
-		 	wdv=.25	
+			wdv=.25	
 		if p3=='diversity':
-		 	wdv=.2
+			wdv=.2
 		if p4=='diversity':
-		 	wdv=.15
+			wdv=.15
 		if p5=='diversity':
-		 	wdv=.1
+			wdv=.1
 
 
 		if p1=='price':
-		 	wp=.3
+			wp=.3
 		if p2=='price':
-		 	wp=.25	
+			wp=.25	
 		if p3=='price':
-		 	wp=.2
+			wp=.2
 		if p4=='price':
-		 	wp=.15
+			wp=.15
 		if p5=='price':
-		 	wp=.1
+			wp=.1
 
 		score= wc* cuisinecount/businesscount + wr*restaurantcount/businesscount+ wdv*diversitycount/113+wd*dietcount/businesscount+ wp*pricecount/businesscount
 		# if score>=maxscore:
@@ -194,6 +194,8 @@ def listing(request):
 
 
 	context={'listings':listings}
+	if(len(matches)==1):
+		return render(request, 'recommender/oneListingPage.html', context)
 	# return render(request, 'recommender/simpleMatches.html', context)
 	# context = {'diversity': diversity, 'cuisine': cuisine, 'restaurant':restaurant, 'foodPrice':foodPrice, 'diet':diet, 'listingurl':toplisting}
 	return render(request, 'recommender/listingDisplayPage.html', context)
