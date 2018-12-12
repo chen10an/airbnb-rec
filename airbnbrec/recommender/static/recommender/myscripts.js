@@ -14,3 +14,18 @@ $(window).on('resize', function(){
       	document.getElementById("big").innerHTML = initInnerHTML;
    	}
 });
+
+function validateForm() {
+  var checkin = document.forms["homeForm"]["checkin"].value;
+  var checkout = document.forms["homeForm"]["checkout"].value;
+  if (checkin >= checkout) {
+    alert("Checkout date must be later than checkin date.");
+    return false;
+  }
+  var minPrice = document.forms["homeForm"]["minPrice"].value;
+  var maxPrice = document.forms["homeForm"]["maxPrice"].value;
+  if (minPrice >= maxPrice) {
+    alert("Maximum price must be greater than minimum price.");
+    return false;
+  }
+}
