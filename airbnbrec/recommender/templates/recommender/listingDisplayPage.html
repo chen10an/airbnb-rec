@@ -21,7 +21,7 @@
 	<body>
 		<div id="backgroundImage">
 			<div id="small">
-				<p id="formTitleSmall"> We found something you might like. </p>
+				<p id="formTitleSmall"> We found some things you might like. </p>
 				<div id="formContainerSmall">
 					<!-- <div id="left">
 						<div id="rect1" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -60,8 +60,9 @@
 							</select>
 						</div>
 					</div> -->
-						<button onclick=" window.open('{{ listings.0.0.listing_url }}')">Let me see it</button>
-						<button onclick=" window.open('{{listings.1.0.listing_url}}')">Show me another</button>
+						<button onclick=" window.open('{{ listings.0.0.listing_url }}')">{{ listings.0.0.name }}</button>
+						<button onclick=" window.open('{{listings.1.0.listing_url}}')">{{ listings.1.0.name }}</button>
+						<button onclick=" window.open('{{listings.2.0.listing_url}}')">{{ listings.2.0.name }}</button>
 					</div>
 				</div>
 			</div>
