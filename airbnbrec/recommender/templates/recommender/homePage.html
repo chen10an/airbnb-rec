@@ -33,7 +33,7 @@ LOW PRIORITY
 			<div id="big">
 				<div id="formContainer">
 					<p id="formTitle"> Book your NYC stay. </p>
-					<form action="customize" method="post"> 
+					<form name="homeForm" action="customize" method="post" onsubmit="return validateForm()"> 
 						{% csrf_token %}
 						<span>
 							<label for="where">WHERE</label>
@@ -309,7 +309,7 @@ LOW PRIORITY
 			<div id="small">
 				<p id="formTitleSmall"> Book unique homes in NYC. </p>
 				<div id="formContainerSmall">
-					<form action="customize" method="post">
+					<form name="homeForm" action="customize" method="post" onsubmit="return validateForm()">
 						{% csrf_token %}
 						<span>
 							<label for="where">WHERE</label>
